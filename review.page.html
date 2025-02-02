@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reviews</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <div *ngIf="reviewForm.get('name')?.invalid && reviewForm.get('name')?.touched" class="error">
+      Name is required.
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Rating (1-5)</ion-label>
+      <ion-input type="number" formControlName="rating"></ion-input>
+    </ion-item>
+    <div *ngIf="reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched" class="error">
+      Valid rating is required.
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Comment</ion-label>
+      <ion-textarea formControlName="comment"></ion-textarea>
+    </ion-item>
+    <div *ngIf="reviewForm.get('comment')?.invalid && reviewForm.get('comment')?.touched" class="error">
+      Comment is required.
+    </div>
+
+    <ion-button expand="full" type="submit" [disabled]="reviewForm.invalid">Submit Review</ion-button>
+  </form>
+
+  <ion-list>
+    <ion-item *ngFor="let review of reviews">
+      <ion-label>
+        <h2>{{ review.name }}</h2>
+        <p>Rating: {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
