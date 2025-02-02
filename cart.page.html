@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Shopping Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail slot="start">
+        <img src="{{ item.image || 'assets/default-image.png' }}" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>Price: {{ item.price | currency }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+      </ion-label>
+      <ion-button (click)="removeItemFromCart(item._id)" color="danger">Remove</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="addItemToCart()">Add Item to Cart</ion-button>
+  <ion-button expand="full" color="danger" (click)="clearCart()">Clear Cart</ion-button>
+</ion-content>
